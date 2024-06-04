@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.proyectoo;
+package Clases;
 
 /**
  *
@@ -12,9 +12,9 @@ public class Letra {
     String nombre;
     int numLetra;
     
-    public Letra(String letra){
-        nombre = letra;
-        numLetra = -1;
+    public Letra(){
+        nombre = "";
+        numLetra = 0;
         
         
     }
@@ -32,29 +32,32 @@ public class Letra {
      *  
      */
     //tarea: REVISAR JAVADOC
-    public boolean equals(Letra v){
-        return nombre.equals(v.nombre);    
+    public boolean equals(String v){
+        return nombre.equals(v);    
     }
     
-    /** @void Funcion que establece el numero de letras dentro de la matriz 
-     * 
-     * @param v 
-     */
-    public void asigLetra(int v){
-        numLetra = v;
+
+    public String getNombre() {
+        return nombre;
     }
-    /** @return String Funcion auxiliar para mostrar Letra y su posicion
-     * 
-     * 
-     */
-    @Override
-    public String toString(){
-        return nombre + "("+numLetra+")";
-        
+
+    public void setNombre(String nombre, int indice) {
+        this.nombre = nombre;
+        this.numLetra = indice;
+    }
+
+    public int getNumLetra() {
+        return numLetra;
+    }
+
+    public boolean EsVacio(){
+        return (this.equals(""));
+        }
+    
     }
     
     
-}    
+    
             
     
 

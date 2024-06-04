@@ -4,9 +4,11 @@
  */
 package Clases;
 
-/**
+import javax.swing.JOptionPane;
+
+/** Clase grafo Sopa, que representa la matriz completa
  *
- * @author samue
+ * @author samu
  */
 public class GrafoSopa {
     private int max;
@@ -49,13 +51,13 @@ public class GrafoSopa {
             for(int j = 0; j < this.NumMatriz; j++){
                 if(x != i && y != j){
                     int aux1 = Math.abs(x-i) + Math.abs(y-j);
-                    if (aux1 == 2){
+                    if (aux1 == 2&&!this.datos[i][j].EsVacio()){
                         this.MatrizAdy[this.getIndice()][this.datos[i][j].numLetra] = this.MatrizAdy[this.datos[i][j].numLetra][this.getIndice()] = 1;
                                 }
                 }
                 else{
                 int aux1 = Math.abs(x-i) + Math.abs(y-j);
-                    if (aux1 == 1){ this.MatrizAdy[this.getIndice()][this.datos[i][j].numLetra] = this.MatrizAdy[this.datos[i][j].numLetra][this.getIndice()] = 1;
+                    if (aux1 ==1&& !this.datos[i][j].EsVacio()){ this.MatrizAdy[this.getIndice()][this.datos[i][j].numLetra] = this.MatrizAdy[this.datos[i][j].numLetra][this.getIndice()] = 1;
                                 }
                 
                 }
@@ -65,11 +67,15 @@ public class GrafoSopa {
     
     
     }
+    
     public boolean AgregarLetra(String Letra){
         
             for (int i = 0; i < this.NumMatriz-1; i++){
                 for (int j = 0; j < this.NumMatriz-1; j++){
-                    if (this.datos[i][j].nombre == ""){
+                    if (this.datos[i][j].EsVacio()){
+                        this.datos[i][j].setNombre(Letra, indice);
+                        indice++;
+                        this.Adyacencia(i, j);
                         
                     
                     }
@@ -86,3 +92,8 @@ public class GrafoSopa {
     
     
 }
+
+
+
+
+
