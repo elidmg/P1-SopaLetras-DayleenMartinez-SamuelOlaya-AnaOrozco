@@ -4,11 +4,12 @@
  */
 package Clases;
 
-import javax.swing.JOptionPane;
+import java.util.LinkedList;
+import java.util.Queue;
 
-/** Clase grafo Sopa, que representa la matriz completa
+/**
  *
- * @author samu
+ * @author samue
  */
 public class GrafoSopa {
     private int max;
@@ -90,10 +91,9 @@ public class GrafoSopa {
     
     
     
-    
 }
-
-
-
-
-
+    
+    
+    
+    
+    
