@@ -106,9 +106,8 @@ public class GrafoSopa {
      * Metodo para agregar una nueva letra a la sopa de letras
      * 
      * @param Letra
-     * @return True si se agrega la letra
      */
-    public boolean AgregarLetra(String Letra){
+    public void AgregarLetra(String Letra){
         
             for (int i = 0; i < this.NumMatriz-1; i++){
                 for (int j = 0; j < this.NumMatriz-1; j++){
@@ -125,7 +124,7 @@ public class GrafoSopa {
             
             }
         
-    return false;
+    
     }
     
     
