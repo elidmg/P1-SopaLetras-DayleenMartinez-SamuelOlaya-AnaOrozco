@@ -5,7 +5,7 @@
 package Clases;
 
 /**Letra
- * Clase para representar la arista letra
+ * Clase para representar el vertice letra
  *
  * @author ani
  */
@@ -28,8 +28,8 @@ public class Letra {
     public String nombreLetra(){
         return nombre;
     }
-    /** equals Funcion que ve si dos vertices son iguales 
-     * @return true si dos vertices son iguales 
+    /** equals Funcion que ve si la letra y una cadena son iguales 
+     * @return true si son iguales 
      * 
      * @param v
      *  
