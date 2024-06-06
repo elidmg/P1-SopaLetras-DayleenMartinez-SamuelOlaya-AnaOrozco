@@ -37,7 +37,7 @@ public class Diccionario {
         
         else {
             Palabra aux = this.first.getNxt();
-            if (Valor.getValor().length()<=this.first.getValor().length()){
+            if (Valor.getValor().length()<this.first.getValor().length()){
                 Valor.setNxt(this.first);
                 this.first = Valor;
                 return true;
