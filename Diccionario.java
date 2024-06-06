@@ -4,8 +4,8 @@
  */
 package Clases;
 
-/**
- *
+/**Diccionario
+ * Esta clase representa el diccionario implementado en una lista enlazada
  * @author samue
  */
 public class Diccionario {
@@ -13,12 +13,20 @@ public class Diccionario {
     public Palabra Last;
     public int Size;
 
+    /**Constructor 
+     * 
+     */
     public Diccionario() {
         this.first = null;
         this.Last = null;
         this.Size = 0;
         
     }
+    /**Agregar 
+     * 
+     * @param valor El valor a agregar
+     * @return True si el valor puede ser agregado 
+     */
     public boolean Agregar(String valor){
         Palabra Valor = new Palabra(valor);
         if (this.first == null){
@@ -55,6 +63,8 @@ public class Diccionario {
             
         
         }
+    
+    //* 
 
     public Palabra getFirst() {
         return first;

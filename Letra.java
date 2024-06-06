@@ -4,7 +4,8 @@
  */
 package Clases;
 
-/**
+/**Letra
+ * Clase para representar la arista letra
  *
  * @author ani
  */
@@ -18,7 +19,8 @@ public class Letra {
         
         
     }
-    /** @return String Funcion que retorna la letra 
+    /** nombreLetra
+     * @return String Funcion que retorna la letra 
      * 
      * 
      */
@@ -26,12 +28,13 @@ public class Letra {
     public String nombreLetra(){
         return nombre;
     }
-    /** @return true Funcion que retorna si dos vertices son iguales 
+    /** equals Funcion que ve si dos vertices son iguales 
+     * @return true si dos vertices son iguales 
      * 
      * @param v
      *  
      */
-    //tarea: REVISAR JAVADOC
+    
     public boolean equals(String v){
         return nombre.equals(v);    
     }
@@ -49,6 +52,11 @@ public class Letra {
     public int getNumLetra() {
         return numLetra;
     }
+    
+    /**EsVacio Funcion que analiza si hay una letra
+     * 
+     * @return 
+     */
 
     public boolean EsVacio(){
         return (this.equals(""));

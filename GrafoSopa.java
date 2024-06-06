@@ -4,19 +4,27 @@
  */
 package Clases;
 
+/**
+ *
+ * @author Indatech
+ */
+
 import java.util.LinkedList;
 import java.util.Queue;
 
-/**
+/**GrafoSopa
+ * Clase para representar el grafo utilizado para la sopa de letras
  *
  * @author samue
  */
 public class GrafoSopa {
-    private int max;
-    private int MatrizAdy[][];
-    private int indice;
-    private Letra datos[][];
-    private int NumMatriz;
+    private int max; //max del graafo
+    private int MatrizAdy[][]; //aristas
+    private int indice; //total de elementos en el grafo
+    private Letra datos[][]; //vertices 
+    private int NumMatriz;//la construccion de la sopa de letras posicion de la letra 
+    
+    
     public GrafoSopa(int maximo){
         this.max = maximo;
         this.MatrizAdy = new int[maximo][maximo];
@@ -46,6 +54,32 @@ public class GrafoSopa {
         return datos;
     }
 
+    public void setMax(int max) {
+        this.max = max;
+    }
+
+    public void setMatrizAdy(int[][] MatrizAdy) {
+        this.MatrizAdy = MatrizAdy;
+    }
+
+    public void setIndice(int indice) {
+        this.indice = indice;
+    }
+
+    public void setDatos(Letra[][] datos) {
+        this.datos = datos;
+    }
+
+    public void setNumMatriz(int NumMatriz) {
+        this.NumMatriz = NumMatriz;
+    }
+
+    /**Adyacencia
+     * Metodo que analiza las conexiones que posee una letra en un puesto en particular
+     * 
+     * @param x
+     * @param y 
+     */
     
     public void Adyacencia(int x, int y){
         for(int i = 0; i < this.NumMatriz; i++){
@@ -68,7 +102,12 @@ public class GrafoSopa {
     
     
     }
-    
+    /**AgregarLetra
+     * Metodo para agregar una nueva letra a la sopa de letras
+     * 
+     * @param Letra
+     * @return True si se agrega la letra
+     */
     public boolean AgregarLetra(String Letra){
         
             for (int i = 0; i < this.NumMatriz-1; i++){
@@ -92,8 +131,6 @@ public class GrafoSopa {
     
     
 }
-    
-    
     
     
     

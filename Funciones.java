@@ -7,14 +7,32 @@ package Clases;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/**
+/**Funciones
+ * Clase con funciones para encontrar las palabras en la sopa 
  *
  * @author samue
  */
 public class Funciones {
     
+    /**Constantes que representan las direcciones horizontales y verticales 
+     * para buscar
+     * 
+     */
+    
+   
     private static final int[] dx = {1, 1, 0, -1, -1, -1, 0, 1};
     private static final int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
+    
+    /**dfs
+     * Busca si la palabra existe mediante Depth First Search 
+     * 
+     * @param datos
+     * @param palabra
+     * @param x
+     * @param y
+     * @param idx
+     * @return True si la palabra es encontrada
+     */
     public boolean dfs(Letra[][] datos, String palabra, int x, int y, int idx) {
         if (idx == palabra.length()) {
             return true;
@@ -39,6 +57,14 @@ public class Funciones {
         return false;
     }
     
+    /**buscarPalabra
+     * Busca las palabras en la sopa mediante Depth First Search  
+     * 
+     * @param datos
+     * @param palabra
+     * @return True si alguna palabra es encontrada
+     */
+    
     public boolean buscarPalabra(Letra[][] datos, String palabra) {
         int n = datos.length;
         int m = datos[0].length;
@@ -52,6 +78,14 @@ public class Funciones {
         }
         return false;
     }
+    
+    /**buscarPalabraBFS
+     * Busca si la palabra dada existe mediante Breadth First Search 
+     * 
+     * @param datos
+     * @param palabra
+     * @return True si alguna de las palabras 
+     */
     
     
     public boolean buscarPalabraBFS(Letra[][] datos, String palabra) {
@@ -93,6 +127,13 @@ public class Funciones {
         return false;
     }
     
+    /**buscarPalabraEspecifico
+     * Funcion para buscar la palabra pedida 
+     * @param palabra
+     * @param metodo
+     * @param datos 
+     */
+    
     public void buscarPalabraEspecifico(Palabra palabra, int metodo, Letra[][] datos){
         if (metodo == 1){
             buscarPalabraBFS(datos, palabra.getValor());
@@ -102,6 +143,14 @@ public class Funciones {
         
         }
     }
+    
+    /**RetornarPalabrasEncontradas
+     * 
+     * @param palabras
+     * @param datos
+     * @param metodo
+     * @return Retorna las palabras encontradas
+     */
     public String [] RetornarPalabrasEncontradas(String[] palabras, Letra[][] datos, int metodo){
         String [] encontradas = new String[palabras.length];
          if (metodo == 1){
