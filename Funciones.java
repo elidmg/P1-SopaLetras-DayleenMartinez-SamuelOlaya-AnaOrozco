@@ -6,33 +6,22 @@ package Clases;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 
-/**Funciones
- * Clase con funciones para encontrar las palabras en la sopa 
+/**
  *
  * @author samue
  */
 public class Funciones {
     
-    /**Constantes que representan las direcciones horizontales y verticales 
-     * para buscar
-     * 
-     */
-    
-   
     private static final int[] dx = {1, 1, 0, -1, -1, -1, 0, 1};
     private static final int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
-    
-    /**dfs
-     * Busca si la palabra existe mediante Depth First Search 
-     * 
-     * @param datos
-     * @param palabra
-     * @param x
-     * @param y
-     * @param idx
-     * @return True si la palabra es encontrada
-     */
     public boolean dfs(Letra[][] datos, String palabra, int x, int y, int idx) {
         if (idx == palabra.length()) {
             return true;
@@ -57,14 +46,6 @@ public class Funciones {
         return false;
     }
     
-    /**buscarPalabra
-     * Busca las palabras en la sopa mediante Depth First Search  
-     * 
-     * @param datos
-     * @param palabra
-     * @return True si alguna palabra es encontrada
-     */
-    
     public boolean buscarPalabra(Letra[][] datos, String palabra) {
         int n = datos.length;
         int m = datos[0].length;
@@ -78,14 +59,6 @@ public class Funciones {
         }
         return false;
     }
-    
-    /**buscarPalabraBFS
-     * Busca si la palabra dada existe mediante Breadth First Search 
-     * 
-     * @param datos
-     * @param palabra
-     * @return True si alguna de las palabras 
-     */
     
     
     public boolean buscarPalabraBFS(Letra[][] datos, String palabra) {
@@ -127,13 +100,6 @@ public class Funciones {
         return false;
     }
     
-    /**buscarPalabraEspecifico
-     * Funcion para buscar la palabra pedida 
-     * @param palabra
-     * @param metodo
-     * @param datos 
-     */
-    
     public void buscarPalabraEspecifico(Palabra palabra, int metodo, Letra[][] datos){
         if (metodo == 1){
             buscarPalabraBFS(datos, palabra.getValor());
@@ -143,14 +109,6 @@ public class Funciones {
         
         }
     }
-    
-    /**RetornarPalabrasEncontradas
-     * 
-     * @param palabras
-     * @param datos
-     * @param metodo
-     * @return Retorna las palabras encontradas
-     */
     public String [] RetornarPalabrasEncontradas(String[] palabras, Letra[][] datos, int metodo){
         String [] encontradas = new String[palabras.length];
          if (metodo == 1){
@@ -176,4 +134,65 @@ public class Funciones {
     
     return encontradas;
     }
+    public String ReadDoc() throws FileNotFoundException, IOException{
+        String line = "";
+        String Cadena = "";
+        
+        javax.swing.JFileChooser jfc = new javax.swing.JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        jfc.setDialogTitle("Select txt");
+	jfc.setAcceptAllFileFilterUsed(false);
+	FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo texto", "txt");
+	jfc.addChoosableFileFilter(filter);
+
+	int Value = jfc.showOpenDialog(null);
+		
+
+	if (Value == javax.swing.JFileChooser.APPROVE_OPTION) {
+            File file = jfc.getSelectedFile();          
+        
+            BufferedReader in = new BufferedReader(new FileReader(file));
+            while ((line = in.readLine()) != null) {
+               Cadena += line;
+                
+	}
+    }
+        return Cadena;
+    }
+    
+    
+    
+    
+    
+    
+    public Diccionario TomarPalabras() throws IOException{
+        String cadena = ReadDoc();
+        String [] aux = cadena.split("\n");
+        Diccionario dicc = new Diccionario();
+        int contador = 0;
+        if (aux[contador].equals("dic")){
+            contador ++;
+            while(!aux[contador].equals("/dic")){
+                dicc.Agregar(aux[contador]);
+                contador++;
+            }
+}
+        return dicc;
+            }
+    
+    public void CargarLetras(GrafoSopa sopita) throws IOException{
+        String cadena = ReadDoc();
+        String [] aux = cadena.split("\n");
+        int contador = 0;
+        if (aux[contador].equals("tab")){
+            contador ++;
+            while(!aux[contador].equals("/tab")){
+                int contador2 = contador-1;
+                String[] letras = aux[contador].split(",");
+                sopita.AgregarLetra(letras[contador2]);
+            }
+}
+    
+    }
+    
+    
 }
