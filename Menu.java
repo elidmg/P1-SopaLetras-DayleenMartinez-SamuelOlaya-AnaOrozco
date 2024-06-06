@@ -4,8 +4,12 @@
  */
 package ClasesInterfaz;
 
-import Clases.JFileChooser;
 import Clases.GrafoSopa;
+import Clases.Funciones;
+import Clases.Diccionario;
+import Clases.Letra;
+import Clases.Palabra;
+import Clases.JFileChooser;
 import Clases.GlobalGrafo;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -21,9 +25,10 @@ import java.util.logging.Logger;
  * @author Dayleen
  */
 public class Menu extends javax.swing.JFrame {
-    
+    Funciones funcion = new Funciones();
     Fondo fondo = new Fondo();
-    GrafoSopa grafo = GlobalGrafo.getGrafo();
+    GrafoSopa grafo = GlobalGrafo.getGrafo();;
+    
 
     /**
      * Creates new form Menu
@@ -31,6 +36,8 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         this.setContentPane(fondo);
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -42,18 +49,21 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new Fondo();
         jTextField3 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        CargarArchivos = new javax.swing.JButton();
         BuscarPalabras = new javax.swing.JButton();
-        PalabrasEspecifico = new javax.swing.JButton();
         MetodoDFS = new javax.swing.JButton();
         MetodoDFS1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         GuardarDiccionario = new javax.swing.JButton();
         BuscarEspecificoBotton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        CargarData = new javax.swing.JButton();
+
+        jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,27 +75,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 2, 12)); // NOI18N
-        jLabel1.setText("Buscar palabra en especifico");
-
-        CargarArchivos.setText("Cargar Archivo");
-        CargarArchivos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CargarArchivosActionPerformed(evt);
-            }
-        });
-
         BuscarPalabras.setText("Buscar Palabras");
         BuscarPalabras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscarPalabrasActionPerformed(evt);
-            }
-        });
-
-        PalabrasEspecifico.setText("Buscar Palabras Especifico");
-        PalabrasEspecifico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PalabrasEspecificoActionPerformed(evt);
             }
         });
 
@@ -104,7 +97,7 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 2, 12)); // NOI18N
-        jLabel2.setText("Metodos de busqueda");
+        jLabel2.setText("Instrucciones");
 
         GuardarDiccionario.setText("Guardar Diccionario");
         GuardarDiccionario.addActionListener(new java.awt.event.ActionListener() {
@@ -120,65 +113,81 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabel4.setText("2. Seleccione el tipo de busqueda que desea ");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabel5.setText("1. Ingrese el tipo de Método Busquéda que desea");
+
+        CargarData.setText("Cargar txt");
+        CargarData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargarDataActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BuscarPalabras)
-                    .addComponent(CargarArchivos))
-                .addGap(174, 174, 174))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(124, 124, 124)
                         .addComponent(GuardarDiccionario))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(PalabrasEspecifico))
+                        .addGap(16, 16, 16)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BuscarEspecificoBotton)
+                        .addGap(27, 27, 27)
+                        .addComponent(BuscarPalabras))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(jLabel2))
+                        .addGap(82, 82, 82)
+                        .addComponent(MetodoDFS)
+                        .addGap(63, 63, 63)
+                        .addComponent(MetodoDFS1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(MetodoDFS)
-                                .addGap(60, 60, 60)
-                                .addComponent(MetodoDFS1))
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(BuscarEspecificoBotton)))))
-                .addContainerGap(88, Short.MAX_VALUE))
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(CargarData)
+                            .addComponent(jLabel2))))
+                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(69, 69, 69)
+                    .addComponent(jLabel5)
+                    .addContainerGap(95, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(160, Short.MAX_VALUE)
-                .addComponent(CargarArchivos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BuscarPalabras)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PalabrasEspecifico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(128, Short.MAX_VALUE)
+                .addComponent(CargarData)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MetodoDFS)
                     .addComponent(MetodoDFS1))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BuscarEspecificoBotton))
-                .addGap(18, 18, 18)
+                    .addComponent(BuscarEspecificoBotton)
+                    .addComponent(BuscarPalabras))
+                .addGap(34, 34, 34)
                 .addComponent(GuardarDiccionario)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(204, 204, 204)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(267, Short.MAX_VALUE)))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 490));
@@ -201,41 +210,10 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void CargarArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArchivosActionPerformed
-        
-        JFileChooser doc = new JFileChooser();
-    String [] letra = doc.getAristas();
-    try{
-        grafo.setNumLetras(doc.getNumLetra());
-        
-        for (int i = 0 ; i <doc.getNumAri();i++){
-            String[]n = letra[i].split(",");
-            
-            int v1 = Integer.parseInt(n[0])-1;
-            int v2 = Integer.parseInt(n[1])-1;
-            
-            grafo.InsertarArista(v1, v2);
-            
-            
-        }
-        JOptionPane.showMessageDialog(null, "Se ha cargado el grafo exitosamente ");
-        
-    } catch (Exception e){
-        JOptionPane.showMessageDialog(null,"Este archivo no contiene un grafo");
-        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE,null,e);
-    }       
-        
-        
-        
-    }//GEN-LAST:event_CargarArchivosActionPerformed
-
     private void BuscarPalabrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarPalabrasActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_BuscarPalabrasActionPerformed
-
-    private void PalabrasEspecificoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PalabrasEspecificoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PalabrasEspecificoActionPerformed
 
     private void MetodoDFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetodoDFSActionPerformed
         // TODO add your handling code here:
@@ -247,11 +225,50 @@ public class Menu extends javax.swing.JFrame {
 
     private void GuardarDiccionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarDiccionarioActionPerformed
         // TODO add your handling code here:
+        
+        JFileChooser doc = new JFileChooser();
+        
+        try {
+            doc.GuardarTxt();
+            JOptionPane.showMessageDialog(null, "Se ha guardado exitosamente!!","EXITO",JOptionPane.INFORMATION_MESSAGE);
+            
+
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se ha guardado el guardado el grafo","ERROR",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_GuardarDiccionarioActionPerformed
 
     private void BuscarEspecificoBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarEspecificoBottonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BuscarEspecificoBottonActionPerformed
+
+    private void CargarDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarDataActionPerformed
+        // TODO add your handling code here:
+        JFileChooser doc = new JFileChooser();
+        String[] ari = doc.getAristas();
+        try {
+            doc.ReadDoc();
+
+            grafo.setIndice(doc.getNumLetra());
+
+            for (int i = 0; i < doc.getNumAri(); i++) {
+                String[] n = ari[i].split(",");
+
+                int v1 = Integer.parseInt(n[0]) - 1;
+                int v2 = Integer.parseInt(n[1]) - 1;
+
+                double s = Double.parseDouble(n[2]);
+
+                grafo.AgregarLetra(v1, v2);
+            }
+            JOptionPane.showMessageDialog(null, "Se ha cargado el grafo exitosamente !!","EXITO",JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Este archivo no contiene un grafo","ERROR",JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_CargarDataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,13 +308,14 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BuscarEspecificoBotton;
     private javax.swing.JButton BuscarPalabras;
-    private javax.swing.JButton CargarArchivos;
+    private javax.swing.JButton CargarData;
     private javax.swing.JButton GuardarDiccionario;
     private javax.swing.JButton MetodoDFS;
     private javax.swing.JButton MetodoDFS1;
-    private javax.swing.JButton PalabrasEspecifico;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField3;
