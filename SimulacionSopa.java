@@ -4,6 +4,7 @@
  */
 package ClasesInterfaz;
 
+import ClasesInterfaz.Menu;
 import Clases.GrafoSopa;
 import Clases.Funciones;
 import Clases.Diccionario;
@@ -26,6 +27,7 @@ public class SimulacionSopa extends javax.swing.JFrame {
     String [] palabraEncontrada;
     Diccionario diccionario;
     Funciones funcion = new Funciones();
+    
      
 
     /**
@@ -35,6 +37,7 @@ public class SimulacionSopa extends javax.swing.JFrame {
     
         this.setContentPane(fondo);
         initComponents();
+        GrafoTextArea.setText(sopita.print());
     }
 
     /**
@@ -177,13 +180,13 @@ public class SimulacionSopa extends javax.swing.JFrame {
 
     private void MostrarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarGrafoActionPerformed
         // TODO add your handling code here:
-        
-        
+        GrafoTextArea.setText(sopita.print());
     }//GEN-LAST:event_MostrarGrafoActionPerformed
 
     private void PalabrasEncontradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PalabrasEncontradasActionPerformed
         // TODO add your handling code here:
-        palabraEncontrada = funcion.RetornarPalabrasEncontradas(diccionario, sopita.getDatos(), metododebusqueda);
+        palabraEncontrada = funcion.RetornarPalabrasEncontradas(diccionario, sopita.getDatos(), metododebusqueda); 
+        MostrarPalabras.setText(palabraEncontrada);
     }//GEN-LAST:event_PalabrasEncontradasActionPerformed
 
     
