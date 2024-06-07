@@ -54,8 +54,6 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
-        GuardarDiccionario = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new Fondo();
         EntradaBottonBuscar = new javax.swing.JTextField();
@@ -70,15 +68,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-
-        jLabel3.setText("jLabel3");
-
-        GuardarDiccionario.setText("Guardar Diccionario");
-        GuardarDiccionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarDiccionarioActionPerformed(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -244,7 +233,7 @@ public class Menu extends javax.swing.JFrame {
 
         //Hacer visible la segunda interfaz 
         this.setVisible(false);
-        SimulacionSopa simulacion = new SimulacionSopa(); //colocar lo que va aqui
+        SimulacionSopa simulacion = new SimulacionSopa(); //
         simulacion.show();
     }//GEN-LAST:event_BuscarTodasBottonInicioActionPerformed
 
@@ -259,19 +248,14 @@ public class Menu extends javax.swing.JFrame {
         metododebusqueda = 1;
     }//GEN-LAST:event_MetodoBFSActionPerformed
 
-    private void GuardarDiccionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarDiccionarioActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_GuardarDiccionarioActionPerformed
-
     private void BuscarEspecificoBottonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarEspecificoBottonInicioActionPerformed
         // TODO add your handling code here:
         Palabra palabra = new Palabra(EntradaBottonBuscar.toString());
         if(funcion.buscarPalabraEspecifico(palabra, metododebusqueda, sopita.getDatos())){
-           //JOptionPane.sho hacer esto Palabra encontrada
+           JOptionPane.showMessageDialog(null, "Palabra Encontrada!");
         }
         else{
-            //Joption no encontrada
+            JOptionPane.showMessageDialog(null, "Palabra No Encontrada =(");
         }
         
         //Hacer visible la segunda interfaz 
@@ -332,11 +316,9 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton BuscarTodasBottonInicio;
     private javax.swing.JButton CargarData;
     private javax.swing.JTextField EntradaBottonBuscar;
-    private javax.swing.JButton GuardarDiccionario;
     private javax.swing.JButton MetodoBFS;
     private javax.swing.JButton MetodoDFS;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

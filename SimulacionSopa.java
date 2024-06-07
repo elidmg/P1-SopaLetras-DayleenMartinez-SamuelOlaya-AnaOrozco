@@ -7,17 +7,13 @@ package ClasesInterfaz;
 import Clases.GrafoSopa;
 import Clases.Funciones;
 import Clases.Diccionario;
-import Clases.Letra;
-import Clases.Palabra;
-import ClasesInterfaz.SimulacionSopa;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 /**
  *
  * @author Dayleen 
