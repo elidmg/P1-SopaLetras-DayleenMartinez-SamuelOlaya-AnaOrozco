@@ -6,23 +6,15 @@ package Clases;
 
 /**
  *
- * @author Indatech
- */
-
-import java.util.LinkedList;
-import java.util.Queue;
-
-/**GrafoSopa
- * Clase para representar el grafo utilizado para la sopa de letras
- *
  * @author samue
  */
 public class GrafoSopa {
-    private int max; //max del graafo
-    private int MatrizAdy[][]; //aristas
-    private int indice; //total de elementos en el grafo
-    private Letra datos[][]; //vertices 
-    private int NumMatriz;//la construccion de la sopa de letras posicion de la letra 
+    private int max;
+    private int MatrizAdy[][];
+    private int indice;
+    private Letra datos[][];
+    private int NumMatriz;
+    
     
     
     public GrafoSopa(int maximo){
@@ -37,6 +29,7 @@ public class GrafoSopa {
     
     
     }
+
 
     public int getMax() {
         return max;
@@ -54,32 +47,6 @@ public class GrafoSopa {
         return datos;
     }
 
-    public void setMax(int max) {
-        this.max = max;
-    }
-
-    public void setMatrizAdy(int[][] MatrizAdy) {
-        this.MatrizAdy = MatrizAdy;
-    }
-
-    public void setIndice(int indice) {
-        this.indice = indice;
-    }
-
-    public void setDatos(Letra[][] datos) {
-        this.datos = datos;
-    }
-
-    public void setNumMatriz(int NumMatriz) {
-        this.NumMatriz = NumMatriz;
-    }
-
-    /**Adyacencia
-     * Metodo que analiza las conexiones que posee una letra en un puesto en particular
-     * 
-     * @param x
-     * @param y 
-     */
     
     public void Adyacencia(int x, int y){
         for(int i = 0; i < this.NumMatriz; i++){
@@ -102,17 +69,14 @@ public class GrafoSopa {
     
     
     }
-    /**AgregarLetra
-     * Metodo para agregar una nueva letra a la sopa de letras
-     * 
-     * @param Letra
-     */
-    public void AgregarLetra(String Letra){
-        
+    
+    public boolean AgregarLetra(String[] Letras){
+        int aux = 0;
             for (int i = 0; i < this.NumMatriz-1; i++){
                 for (int j = 0; j < this.NumMatriz-1; j++){
                     if (this.datos[i][j].EsVacio()){
-                        this.datos[i][j].setNombre(Letra, indice);
+                        this.datos[i][j].setNombre(Letras[aux], indice);
+                        aux ++;
                         indice++;
                         this.Adyacencia(i, j);
                         
@@ -124,12 +88,14 @@ public class GrafoSopa {
             
             }
         
-    
+    return false;
     }
     
     
     
 }
+    
+    
     
     
     

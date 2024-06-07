@@ -9,8 +9,7 @@ import Clases.Funciones;
 import Clases.Diccionario;
 import Clases.Letra;
 import Clases.Palabra;
-import Clases.JFileChooser;
-import Clases.GlobalGrafo;
+import ClasesInterfaz.SimulacionSopa;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -26,14 +25,20 @@ import java.util.logging.Logger;
  */
 public class Menu extends javax.swing.JFrame {
     Funciones funcion = new Funciones();
-    Fondo fondo = new Fondo();
-    GrafoSopa grafo = GlobalGrafo.getGrafo();;
+    GrafoSopa sopita;
+    Fondo fondo = new Fondo();  
+    int metododebusqueda;
+    String [] palabraEncontrada;
+    Diccionario diccionario;
+    
+   
     
 
     /**
      * Creates new form Menu
      */
     public Menu() {
+        
         this.setContentPane(fondo);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -50,54 +55,23 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
+        GuardarDiccionario = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new Fondo();
-        jTextField3 = new javax.swing.JTextField();
-        BuscarPalabras = new javax.swing.JButton();
+        EntradaBottonBuscar = new javax.swing.JTextField();
+        BuscarTodasBottonInicio = new javax.swing.JButton();
         MetodoDFS = new javax.swing.JButton();
-        MetodoDFS1 = new javax.swing.JButton();
+        MetodoBFS = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        GuardarDiccionario = new javax.swing.JButton();
-        BuscarEspecificoBotton = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        BuscarEspecificoBottonInicio = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         CargarData = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         jLabel3.setText("jLabel3");
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
-        BuscarPalabras.setText("Buscar Palabras");
-        BuscarPalabras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarPalabrasActionPerformed(evt);
-            }
-        });
-
-        MetodoDFS.setText("DFS");
-        MetodoDFS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MetodoDFSActionPerformed(evt);
-            }
-        });
-
-        MetodoDFS1.setText("BFS");
-        MetodoDFS1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MetodoDFS1ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 2, 12)); // NOI18N
-        jLabel2.setText("Instrucciones");
 
         GuardarDiccionario.setText("Guardar Diccionario");
         GuardarDiccionario.addActionListener(new java.awt.event.ActionListener() {
@@ -106,25 +80,73 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        BuscarEspecificoBotton.setText("Buscar");
-        BuscarEspecificoBotton.addActionListener(new java.awt.event.ActionListener() {
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        EntradaBottonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarEspecificoBottonActionPerformed(evt);
+                EntradaBottonBuscarActionPerformed(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jLabel4.setText("2. Seleccione el tipo de busqueda que desea ");
+        BuscarTodasBottonInicio.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        BuscarTodasBottonInicio.setText("Buscar Todas");
+        BuscarTodasBottonInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarTodasBottonInicioActionPerformed(evt);
+            }
+        });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jLabel5.setText("1. Ingrese el tipo de Método Busquéda que desea");
+        MetodoDFS.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        MetodoDFS.setText("DFS");
+        MetodoDFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MetodoDFSActionPerformed(evt);
+            }
+        });
 
-        CargarData.setText("Cargar txt");
+        MetodoBFS.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        MetodoBFS.setText("BFS");
+        MetodoBFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MetodoBFSActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel2.setText("Instrucciones");
+
+        BuscarEspecificoBottonInicio.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        BuscarEspecificoBottonInicio.setText("Buscar");
+        BuscarEspecificoBottonInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarEspecificoBottonInicioActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel5.setText("2. Haga click en que Método de busquéda desea utilizar");
+
+        CargarData.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        CargarData.setText("Cargar Archivo");
         CargarData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CargarDataActionPerformed(evt);
             }
         });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel6.setText("1. Cargue el archivo de texto plano en el botón \"Cargar Archivo\"");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel7.setText("-Buscar todas las palabras ");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel8.setText("3. Seleccione entre: ");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel9.setText("-Buscar una palabra en específico");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -133,61 +155,67 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(GuardarDiccionario))
+                        .addGap(138, 138, 138)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(BuscarTodasBottonInicio)
+                                .addGap(29, 29, 29))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(BuscarEspecificoBotton)
-                        .addGap(27, 27, 27)
-                        .addComponent(BuscarPalabras))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
+                        .addGap(100, 100, 100)
                         .addComponent(MetodoDFS)
-                        .addGap(63, 63, 63)
-                        .addComponent(MetodoDFS1))
+                        .addGap(66, 66, 66)
+                        .addComponent(MetodoBFS))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel4))
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel9))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(CargarData)
-                            .addComponent(jLabel2))))
-                .addContainerGap(28, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(69, 69, 69)
-                    .addComponent(jLabel5)
-                    .addContainerGap(95, Short.MAX_VALUE)))
+                        .addGap(60, 60, 60)
+                        .addComponent(EntradaBottonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BuscarEspecificoBottonInicio))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(CargarData))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(jLabel2)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(128, Short.MAX_VALUE)
+                .addGap(133, 133, 133)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
                 .addComponent(CargarData)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MetodoDFS)
-                    .addComponent(MetodoDFS1))
-                .addGap(26, 26, 26)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                    .addComponent(MetodoBFS))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BuscarEspecificoBotton)
-                    .addComponent(BuscarPalabras))
-                .addGap(34, 34, 34)
-                .addComponent(GuardarDiccionario)
-                .addContainerGap(82, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(204, 204, 204)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(267, Short.MAX_VALUE)))
+                    .addComponent(EntradaBottonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BuscarEspecificoBottonInicio))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BuscarTodasBottonInicio)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 490));
@@ -206,66 +234,60 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void EntradaBottonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntradaBottonBuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_EntradaBottonBuscarActionPerformed
 
-    private void BuscarPalabrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarPalabrasActionPerformed
+    private void BuscarTodasBottonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarTodasBottonInicioActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_BuscarPalabrasActionPerformed
+        palabraEncontrada = funcion.RetornarPalabrasEncontradas(diccionario, sopita.getDatos(), metododebusqueda);
+
+        //Hacer visible la segunda interfaz 
+        this.setVisible(false);
+        SimulacionSopa simulacion = new SimulacionSopa(); //colocar lo que va aqui
+        simulacion.show();
+    }//GEN-LAST:event_BuscarTodasBottonInicioActionPerformed
 
     private void MetodoDFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetodoDFSActionPerformed
         // TODO add your handling code here:
+        metododebusqueda = 2;
+        
     }//GEN-LAST:event_MetodoDFSActionPerformed
 
-    private void MetodoDFS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetodoDFS1ActionPerformed
+    private void MetodoBFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetodoBFSActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MetodoDFS1ActionPerformed
+        metododebusqueda = 1;
+    }//GEN-LAST:event_MetodoBFSActionPerformed
 
     private void GuardarDiccionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarDiccionarioActionPerformed
         // TODO add your handling code here:
         
-        JFileChooser doc = new JFileChooser();
-        
-        try {
-            doc.GuardarTxt();
-            JOptionPane.showMessageDialog(null, "Se ha guardado exitosamente!!","EXITO",JOptionPane.INFORMATION_MESSAGE);
-            
-
-        } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "No se ha guardado el guardado el grafo","ERROR",JOptionPane.ERROR_MESSAGE);
-        }
     }//GEN-LAST:event_GuardarDiccionarioActionPerformed
 
-    private void BuscarEspecificoBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarEspecificoBottonActionPerformed
+    private void BuscarEspecificoBottonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarEspecificoBottonInicioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BuscarEspecificoBottonActionPerformed
+        Palabra palabra = new Palabra(EntradaBottonBuscar.toString());
+        if(funcion.buscarPalabraEspecifico(palabra, metododebusqueda, sopita.getDatos())){
+           //JOptionPane.sho hacer esto Palabra encontrada
+        }
+        else{
+            //Joption no encontrada
+        }
+        
+        //Hacer visible la segunda interfaz 
+        this.setVisible(false);
+        SimulacionSopa simulacion = new SimulacionSopa(); //colocar lo que va aqui
+        simulacion.show();
+    }//GEN-LAST:event_BuscarEspecificoBottonInicioActionPerformed
 
     private void CargarDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarDataActionPerformed
-        // TODO add your handling code here:
-        JFileChooser doc = new JFileChooser();
-        String[] ari = doc.getAristas();
         try {
-            doc.ReadDoc();
-
-            grafo.setIndice(doc.getNumLetra());
-
-            for (int i = 0; i < doc.getNumAri(); i++) {
-                String[] n = ari[i].split(",");
-
-                int v1 = Integer.parseInt(n[0]) - 1;
-                int v2 = Integer.parseInt(n[1]) - 1;
-
-                double s = Double.parseDouble(n[2]);
-
-                grafo.AgregarLetra(v1, v2);
-            }
-            JOptionPane.showMessageDialog(null, "Se ha cargado el grafo exitosamente !!","EXITO",JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Este archivo no contiene un grafo","ERROR",JOptionPane.ERROR_MESSAGE);
+            // TODO add your handling code here:
+            String [] letras = funcion.CargarLetras();
+            sopita = new GrafoSopa(letras.length);
+            sopita.AgregarLetra(letras);
+            diccionario = funcion.TomarPalabras();
+         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_CargarDataActionPerformed
@@ -306,19 +328,22 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BuscarEspecificoBotton;
-    private javax.swing.JButton BuscarPalabras;
+    private javax.swing.JButton BuscarEspecificoBottonInicio;
+    private javax.swing.JButton BuscarTodasBottonInicio;
     private javax.swing.JButton CargarData;
+    private javax.swing.JTextField EntradaBottonBuscar;
     private javax.swing.JButton GuardarDiccionario;
+    private javax.swing.JButton MetodoBFS;
     private javax.swing.JButton MetodoDFS;
-    private javax.swing.JButton MetodoDFS1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
     
     class Fondo extends JPanel{

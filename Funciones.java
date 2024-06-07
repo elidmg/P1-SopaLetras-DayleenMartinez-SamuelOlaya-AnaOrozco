@@ -100,33 +100,43 @@ public class Funciones {
         return false;
     }
     
-    public void buscarPalabraEspecifico(Palabra palabra, int metodo, Letra[][] datos){
+    public boolean buscarPalabraEspecifico(Palabra palabra, int metodo, Letra[][] datos){
         if (metodo == 1){
-            buscarPalabraBFS(datos, palabra.getValor());
+            if(buscarPalabraBFS(datos, palabra.getValor())){
+            return true;
+            }
         }
         else if (metodo == 2){
-            buscarPalabra(datos, palabra.getValor());
+            if(buscarPalabra(datos, palabra.getValor())){
+            return true;
+            }
         
         }
+        return false;
     }
-    public String [] RetornarPalabrasEncontradas(String[] palabras, Letra[][] datos, int metodo){
-        String [] encontradas = new String[palabras.length];
+    public String [] RetornarPalabrasEncontradas(Diccionario palabras, Letra[][] datos, int metodo){
+        String [] encontradas = new String[palabras.getSize()];
          if (metodo == 1){
-             for (int i = 0; i<palabras.length; i++) {
+                Palabra palabra = palabras.getFirst();
+             for (int i = 0; i<palabras.getSize(); i++) {
                  
-                 String palabra = palabras[i];
-                 if (buscarPalabraBFS(datos, palabra)){
-                     encontradas[i] = palabra;
+                 if (buscarPalabraBFS(datos, palabra.getValor())){
+                     encontradas[i] = palabra.getValor();
+                     
                  }
+                palabra = palabra.getNxt();
              }
 }
         else {
-             for (int i = 0; i<palabras.length; i++) {
+             Palabra palabra = palabras.getFirst();
+             for (int i = 0; i<palabras.getSize(); i++) {
                  
-                 String palabra = palabras[i];
-            if(buscarPalabra(datos, palabra)){
-                encontradas[i] = palabra;
-            }             }
+                
+            if(buscarPalabra(datos, palabra.getValor())){
+                encontradas[i] = palabra.getValor();
+            }
+            palabra = palabra.getNxt();
+             }
             
         
         }
@@ -179,19 +189,18 @@ public class Funciones {
         return dicc;
             }
     
-    public void CargarLetras(GrafoSopa sopita) throws IOException{
+    public String[] CargarLetras() throws IOException{
         String cadena = ReadDoc();
         String [] aux = cadena.split("\n");
         int contador = 0;
         if (aux[contador].equals("tab")){
             contador ++;
-            while(!aux[contador].equals("/tab")){
-                int contador2 = contador-1;
-                String[] letras = aux[contador].split(",");
-                sopita.AgregarLetra(letras[contador2]);
-            }
+            String[] letras = aux[contador].split(",");
+            return letras;
+            
 }
-    
+    String [] Vacio = new String [2]; 
+    return Vacio;
     }
     
     
