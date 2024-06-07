@@ -224,17 +224,40 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EntradaBottonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntradaBottonBuscarActionPerformed
-        // TODO add your handling code here:
+    // TODO add your handling code here:
     }//GEN-LAST:event_EntradaBottonBuscarActionPerformed
 
     private void BuscarTodasBottonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarTodasBottonInicioActionPerformed
-        // TODO add your handling code here:
+            // Validar que el diccionario no esté vacío
+    if (diccionario == null || diccionario.EsVacio()) {
+        JOptionPane.showMessageDialog(this, "El diccionario está vacío o no se ha cargado.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Validar que la sopa de letras esté cargada
+    if (sopita == null || sopita.getDatos() == null || sopita.getDatos().length == 0) {
+        JOptionPane.showMessageDialog(this, "La sopa de letras no está cargada.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Validar que el método de búsqueda esté definido
+    if (metododebusqueda == 0) {
+        JOptionPane.showMessageDialog(this, "El método de búsqueda no está definido.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    try{
         palabraEncontrada = funcion.RetornarPalabrasEncontradas(diccionario, sopita.getDatos(), metododebusqueda);
 
         //Hacer visible la segunda interfaz 
         this.setVisible(false);
         SimulacionSopa simulacion = new SimulacionSopa(); //
         simulacion.show();
+    }
+    catch(Exception ex) {
+        // Manejar cualquier excepción que pueda ocurrir
+        JOptionPane.showMessageDialog(this, "Ocurrió un error al buscar palabras: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
     }//GEN-LAST:event_BuscarTodasBottonInicioActionPerformed
 
     private void MetodoDFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetodoDFSActionPerformed
