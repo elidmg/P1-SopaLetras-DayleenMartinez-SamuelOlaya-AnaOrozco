@@ -14,14 +14,30 @@ import java.io.IOException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
-/**
+/**Funciones
+ * Funciones para buscar las palabras en la sopa de letras
+ * 
  *
  * @author samue
  */
 public class Funciones {
     
+/**Arrays de direcciones en x y en y
+ * 
+ */
     private static final int[] dx = {1, 1, 0, -1, -1, -1, 0, 1};
     private static final int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
+    
+    /**dfs
+     * Metodo para buscar palabra mediante Depth First Search 
+     * 
+     * @param datos
+     * @param palabra
+     * @param x
+     * @param y
+     * @param idx
+     * @return true si se encuenra la palabra
+     */
     public boolean dfs(Letra[][] datos, String palabra, int x, int y, int idx) {
         if (idx == palabra.length()) {
             return true;
@@ -46,6 +62,14 @@ public class Funciones {
         return false;
     }
     
+    /**buscarPalabra
+     * Funcion que busca palabra en la sopa de letras utilizando DFS
+     * 
+     * @param datos
+     * @param palabra
+     * @return true si se encuentra la palabra en la sopa
+     */
+    
     public boolean buscarPalabra(Letra[][] datos, String palabra) {
         int n = datos.length;
         int m = datos[0].length;
@@ -60,7 +84,13 @@ public class Funciones {
         return false;
     }
     
-    
+/**buscarPalabraBFS
+ * Buscar palabra mediante Breadth First Search
+ * 
+ * @param datos
+ * @param palabra
+ * @return true si se encuentra la palabra
+ */   
     public boolean buscarPalabraBFS(Letra[][] datos, String palabra) {
         int n = datos.length;
         int m = datos[0].length;
@@ -99,6 +129,14 @@ public class Funciones {
         }
         return false;
     }
+/**buscarPalabraEspecifico
+ * Busca la palabra especifica en la sopa de letras utilizando DFS o BFS
+ * 
+ * @param palabra
+ * @param metodo
+ * @param datos
+ * @return true si se encuentra la palabra
+ */
     
     public boolean buscarPalabraEspecifico(Palabra palabra, int metodo, Letra[][] datos){
         if (metodo == 1){
@@ -114,6 +152,15 @@ public class Funciones {
         }
         return false;
     }
+/**RetornarPalabrasEcontradas
+ * Devuelve un array de strings con las palabras encontradas en la sopa de letras
+ * 
+ * @param palabras
+ * @param datos
+ * @param metodo
+ * @return Array de Strings de las palabras encontradas
+ */
+    
     public String [] RetornarPalabrasEncontradas(Diccionario palabras, Letra[][] datos, int metodo){
         String [] encontradas = new String[palabras.getSize()];
          if (metodo == 1){
@@ -144,6 +191,13 @@ public class Funciones {
     
     return encontradas;
     }
+/**ReadDoc
+ * Lee el contenido del archivo seleccionado por el usuario
+ * 
+ * @return El contenido del archivo de texto seleccionado por el usuario
+ * @throws FileNotFoundException si el archivo no se encuentra
+ * @throws IOException si ocurre un error al leer el archivo
+ */
     public String ReadDoc() throws FileNotFoundException, IOException{
         String line = "";
         String Cadena = "";
@@ -171,7 +225,12 @@ public class Funciones {
     
     
     
-    
+/**TomarPalabras
+ * Lee el contenido del archivo de texto y extrae las palabras del diccionario
+ * 
+ * @return objeto Diccionario que contiene las palabras extraidas del archivo
+ * @throws IOException si ocurre un error al leer el archivo
+ */    
     
     
     public Diccionario TomarPalabras() throws IOException{
@@ -188,6 +247,13 @@ public class Funciones {
 }
         return dicc;
             }
+    
+/**CargarLetras
+ * Lee el contenido del archivo de texto y extrae las letras de la sopa letras
+ * 
+ * @return un array de strings con las letras extraidas del archivo 
+ * @throws IOException si ocurre un error al leer el archivo 
+ */
     
     public String[] CargarLetras() throws IOException{
         String cadena = ReadDoc();

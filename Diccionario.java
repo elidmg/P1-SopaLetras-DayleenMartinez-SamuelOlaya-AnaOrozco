@@ -4,7 +4,9 @@
  */
 package Clases;
 
-/**
+/**Clase Diccionario
+ * 
+ * 
  *
  * @author samue
  */
@@ -12,13 +14,22 @@ public class Diccionario {
     public Palabra first;
     public Palabra Last;
     public int Size;
-
+    
+/**Constructor de Diccionario
+ * 
+ */
     public Diccionario() {
         this.first = null;
         this.Last = null;
         this.Size = 0;
         
     }
+ /**Agregar 
+  * Metodo para agregar palabras al diccionario
+  * 
+  * @param valor
+  * @return True si se agrega la palabra 
+  */
     public boolean Agregar(String valor){
         Palabra Valor = new Palabra(valor);
         if (this.first == null){
@@ -55,31 +66,66 @@ public class Diccionario {
             
         
         }
+/**EsVacio
+ * Metodo para saber si el diccionario esta vacio
+ * 
+ * @return true si el diccionario esta vacio
+ */
     
     public boolean EsVacio(){
-        return first == null;
+        return first==null;
+        
     }
-    
+/**getFirst 
+ * Obtiene la primera palabra del diccionario 
+ * 
+ * @return first  
+ */
 
     public Palabra getFirst() {
         return first;
     }
+/**getLast 
+ * Obtiene la segunda palabra del diccionario 
+ * 
+ * @return Last
+ */
 
     public Palabra getLast() {
         return Last;
     }
+/**getsize
+ * Obtine el size del diccionario
+ * 
+ * @return Size
+ */
 
     public int getSize() {
         return Size;
     }
+/**setFirst
+ * Establece la primera palabra del diccionario
+ * 
+ * @param first 
+ */
 
     public void setFirst(Palabra first) {
         this.first = first;
     }
+/**setLast
+ * Establece la ultima palabra del diccionario 
+ * 
+ * @param Last 
+ */
 
     public void setLast(Palabra Last) {
         this.Last = Last;
     }
+/**setSize
+ * Establece el size del diccionario
+ * 
+ * @param Size 
+ */
 
     public void setSize(int Size) {
         this.Size = Size;

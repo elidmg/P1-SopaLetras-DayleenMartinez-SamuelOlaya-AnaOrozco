@@ -4,7 +4,8 @@
  */
 package Clases;
 
-/**
+/**GrafoSopa
+ * Representa un grafo para la sopa de letras
  *
  * @author samue
  */
@@ -16,7 +17,10 @@ public class GrafoSopa {
     private int NumMatriz;
     
     
-    
+/**Contructor de la clase GrafoSopa
+ * 
+ * @param maximo 
+ */    
     public GrafoSopa(int maximo){
         this.max = maximo;
         this.MatrizAdy = new int[maximo][maximo];
@@ -30,23 +34,46 @@ public class GrafoSopa {
     
     }
 
-
+/**getMax
+ * Obtiene la magnitud maxima del grafo
+ * 
+ * @return la magnitud maxima del grafo 
+ */
     public int getMax() {
         return max;
     }
+/**getMatrizAdy
+ * Obtiene la matriz de adyacencia del grafo
+ * 
+ * @return la matriz de adyacencia del grafo
+ */
 
     public int[][] getMatrizAdy() {
         return MatrizAdy;
     }
+/**getIndice
+ * Obtiene el indice actual del grafo
+ * 
+ * @return el indice actual del grafo
+ */
 
     public int getIndice() {
         return indice;
     }
+/**getDatos
+ * Obtiene los datos del grafo
+ * 
+ * @return los datos del grafo
+ */
 
     public Letra[][] getDatos() {
         return datos;
     }
-
+/**Adyacencia
+ * Establece la adyacencia entre dos letras en el grafo
+ * @param x
+ * @param y 
+ */
     
     public void Adyacencia(int x, int y){
         for(int i = 0; i < this.NumMatriz; i++){
@@ -69,7 +96,13 @@ public class GrafoSopa {
     
     
     }
-    
+/**AgregarLetra
+ * Agrega letras a la sopa de letras y establece la adyacencia correspondiente en el grafo
+ * 
+ * 
+ * @param Letras
+ * @return 
+ */
     public boolean AgregarLetra(String[] Letras){
         int aux = 0;
             for (int i = 0; i < this.NumMatriz-1; i++){

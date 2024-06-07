@@ -5,7 +5,7 @@
 package Clases;
 
 /**Letra
- * Clase para representar el vertice letra
+ * clase que representa una letra en la sopa de letras
  *
  * @author ani
  */
@@ -13,6 +13,9 @@ public class Letra {
     String nombre;
     int numLetra;
     
+/**Contructor de la clase letra
+ * 
+ */
     public Letra(){
         nombre = "";
         numLetra = 0;
@@ -20,44 +23,57 @@ public class Letra {
         
     }
     /** nombreLetra
-     * @return String Funcion que retorna la letra 
+     * Obtiene el nombre de la lera
      * 
-     * 
+     * @return Stringe el nombre de la letra
      */
     
     public String nombreLetra(){
         return nombre;
     }
-    /** equals Funcion que ve si la letra y una cadena son iguales 
-     * @return true si son iguales 
+    /** equals
+     * Compara si el nombre de una letra es igual al nombre de otra
+     * @return true si dos nombres de letras son iguales 
      * 
      * @param v
-     *  
-     */
-    
+     **/
     public boolean equals(String v){
         return nombre.equals(v);    
     }
-    
-
+/**getNombre
+ * Obtiene el nombre de la letra 
+ * 
+ * @return el nombre de la letra
+ */
+   
     public String getNombre() {
         return nombre;
     }
-
+/**setNombre
+ * Establece el nombre de la letra y su numero de letra asociado
+ * 
+ * @param nombre
+ * @param indice 
+ */
     public void setNombre(String nombre, int indice) {
         this.nombre = nombre;
         this.numLetra = indice;
     }
+/**getNumLetra
+ * Obtiene el numero de la letra
+ * 
+ * @return el numero de la letra
+ */
 
     public int getNumLetra() {
         return numLetra;
     }
-    
-    /**EsVacio Funcion que analiza si hay una letra
-     * 
-     * @return 
-     */
 
+/**EsVacio
+ * verifica si el nodo esta vacio
+ * 
+ * @return true si el nodo es vacio
+ */
     public boolean EsVacio(){
         return (this.equals(""));
         }
