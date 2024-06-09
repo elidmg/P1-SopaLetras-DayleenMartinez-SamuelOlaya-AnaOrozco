@@ -7,21 +7,19 @@ package ClasesInterfaz;
 import Clases.GrafoSopa;
 import Clases.Funciones;
 import Clases.Diccionario;
-import Clases.Letra;
 import Clases.Palabra;
-import ClasesInterfaz.SimulacionSopa;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
- * @author Dayleen
+ * @author Samuel, Dayleen y Ana
  */
 public class Menu extends javax.swing.JFrame {
     Funciones funcion = new Funciones();
@@ -30,6 +28,11 @@ public class Menu extends javax.swing.JFrame {
     int metododebusqueda;
     String [] palabraEncontrada;
     Diccionario diccionario;
+    String [] letra;
+    String cadena;
+    SimulacionSopa simulacion; 
+    
+    
     
    
     
@@ -247,11 +250,9 @@ public class Menu extends javax.swing.JFrame {
             return;
         }
         try {
-            palabraEncontrada = funcion.RetornarPalabrasEncontradas(diccionario, sopita.getDatos(), metododebusqueda);
-
-            //Hacer visible la segunda interfaz 
+            //Diccionario diccionarionuevo = funcion.RetornarPalabrasEncontradas(diccionario, sopita.getDatos(), metododebusqueda); 
             this.setVisible(false);
-            SimulacionSopa simulacion = new SimulacionSopa(); //
+            simulacion = new SimulacionSopa(sopita, diccionario, metododebusqueda);
             simulacion.show();
         } catch (Exception ex) {
             // Manejar cualquier excepción que pueda ocurrir
@@ -264,6 +265,7 @@ public class Menu extends javax.swing.JFrame {
     private void MetodoDFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetodoDFSActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
+        
         if (diccionario == null || diccionario.EsVacio()) {
             JOptionPane.showMessageDialog(this, "El diccionario está vacío o no se ha cargado.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -276,12 +278,15 @@ public class Menu extends javax.swing.JFrame {
         }
         
         metododebusqueda = 2;
+        JOptionPane.showMessageDialog(this, "Metodo seleccionado, continue", "=)", JOptionPane.INFORMATION_MESSAGE);
+            
         
     }//GEN-LAST:event_MetodoDFSActionPerformed
 
     private void MetodoBFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetodoBFSActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
+        
         if (diccionario == null || diccionario.EsVacio()) {
             JOptionPane.showMessageDialog(this, "El diccionario está vacío o no se ha cargado.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -293,6 +298,7 @@ public class Menu extends javax.swing.JFrame {
             return;
         }
         metododebusqueda = 1;
+        JOptionPane.showMessageDialog(this, "Metodo seleccionado, continue", "=)", JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_MetodoBFSActionPerformed
 
@@ -310,6 +316,12 @@ public class Menu extends javax.swing.JFrame {
             return;
         }
         
+        // Validar que la entrada del usuario esté en mayúsculas
+        if (!entradaUsuario.equals(entradaUsuario.toUpperCase())) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese la palabra en mayúsculas.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         // Crear el objeto palabra con la entrada del usuario
         Palabra palabra = new Palabra(entradaUsuario);
         
@@ -322,20 +334,32 @@ public class Menu extends javax.swing.JFrame {
         
         //Hacer visible la segunda interfaz 
         this.setVisible(false);
-        SimulacionSopa simulacion = new SimulacionSopa(); //colocar lo que va aqui
+        simulacion = new SimulacionSopa(sopita, diccionario, metododebusqueda); //colocar lo que va aqui
         simulacion.show();
     }//GEN-LAST:event_BuscarEspecificoBottonInicioActionPerformed
 
     private void CargarDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarDataActionPerformed
-        try {
+        
+         try {
             // TODO add your handling code here:
-            String [] letras = funcion.CargarLetras();
-            sopita = new GrafoSopa(letras.length);
-            sopita.AgregarLetra(letras);
-            diccionario = funcion.TomarPalabras();
-         } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+            cadena = funcion.ReadDoc();
+           
+            diccionario = funcion.TomarPalabras(cadena);
+            
+            letra = funcion.CargarLetras(cadena);
+            sopita = new GrafoSopa(letra.length);
+            sopita.AgregarLetra(letra);
+            JOptionPane.showMessageDialog(this, "La sopa ha sido cargada con exito", "Bien", JOptionPane.INFORMATION_MESSAGE);
+        }catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "El archivo no se encontró: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error al leer el archivo: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            
+    }     
+       
+
     }//GEN-LAST:event_CargarDataActionPerformed
 
     /**

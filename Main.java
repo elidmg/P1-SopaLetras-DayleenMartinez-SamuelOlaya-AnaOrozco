@@ -9,7 +9,7 @@ import ClasesInterfaz.Menu;
 
 /**
  *
- * @author Indatech
+ * @author Samuel, Dayleen y Ana
  */
 public class Main {
 
@@ -22,6 +22,4 @@ public class Main {
         sopa.setVisible(true);
     }
     
-        
-
 }

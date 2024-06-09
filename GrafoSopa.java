@@ -6,14 +6,14 @@ package Clases;
 
 /**
  *
- * @author samue
+ * @author Samuel, Dayleen y Ana
  */
 public class GrafoSopa {
-    private int max; //max del grafo
-    private int MatrizAdy[][]; //aristas
-    private int indice; //total de elementos en el grafo
-    private Letra datos[][]; //vertices
-    private int NumMatriz; //posicion de letras 
+    private int max;
+    private int MatrizAdy[][]; 
+    private int indice; 
+    private Letra datos[][]; 
+    private int NumMatriz;  
     
     
     
@@ -26,16 +26,14 @@ public class GrafoSopa {
             datos = new Letra[this.NumMatriz][this.NumMatriz];
         
         }
-    
-    
     }
     
     public String print(){
         String Matrix = "";
         System.out.println("La matriz tiene " +  getIndice() + " vertices \n");
-        for (int i = 0; i <  getIndice(); i++) {
-            for (int j = 0; j <  getIndice(); j++) {
-                Matrix += "[" + getMatrizAdy()[i][j] + "]" + " ";
+        for (int i = 0; i <  NumMatriz; i++) {
+            for (int j = 0; j <  NumMatriz; j++) {
+                Matrix += "[" + datos[i][j].getNombre() + "]" + " ";
             }
             Matrix = Matrix + "\n";
         }
@@ -65,13 +63,13 @@ public class GrafoSopa {
             for(int j = 0; j < this.NumMatriz; j++){
                 if(x != i && y != j){
                     int aux1 = Math.abs(x-i) + Math.abs(y-j);
-                    if (aux1 == 2&&!this.datos[i][j].EsVacio()){
-                        this.MatrizAdy[this.getIndice()][this.datos[i][j].numLetra] = this.MatrizAdy[this.datos[i][j].numLetra][this.getIndice()] = 1;
+                    if (aux1 == 2 && this.datos[i][j] != null){
+                        this.MatrizAdy[this.getIndice() -1][this.datos[i][j].numLetra] = this.MatrizAdy[this.datos[i][j].numLetra][this.getIndice()-1] = 1;
                                 }
                 }
                 else{
                 int aux1 = Math.abs(x-i) + Math.abs(y-j);
-                    if (aux1 ==1&& !this.datos[i][j].EsVacio()){ this.MatrizAdy[this.getIndice()][this.datos[i][j].numLetra] = this.MatrizAdy[this.datos[i][j].numLetra][this.getIndice()] = 1;
+                    if (aux1 ==1&& this.datos[i][j]!= null){ this.MatrizAdy[this.getIndice()-1][this.datos[i][j].numLetra] = this.MatrizAdy[this.datos[i][j].numLetra][this.getIndice()-1] = 1;
                                 }
                 
                 }
@@ -84,19 +82,17 @@ public class GrafoSopa {
     
     public boolean AgregarLetra(String[] Letras){
         int aux = 0;
-            for (int i = 0; i < this.NumMatriz-1; i++){
-                for (int j = 0; j < this.NumMatriz-1; j++){
-                    if (this.datos[i][j].EsVacio()){
-                        this.datos[i][j].setNombre(Letras[aux], indice);
+            for (int i = 0; i < this.NumMatriz; i++){
+                for (int j = 0; j < this.NumMatriz; j++){
+                    if (this.datos[i][j] == null){
+                        this.datos[i][j] = new Letra(Letras[aux], indice);
                         aux ++;
                         indice++;
                         this.Adyacencia(i, j);
                         
-                    
                     }
                 
                 }
-            
             
             }
         

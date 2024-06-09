@@ -4,20 +4,17 @@
  */
 package ClasesInterfaz;
 
-import ClasesInterfaz.Menu;
 import Clases.GrafoSopa;
 import Clases.Funciones;
 import Clases.Diccionario;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.IOException;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
  *
- * @author Dayleen 
+ * @author Samuel, Dayleen y Ana 
  */
 public class SimulacionSopa extends javax.swing.JFrame {
     
@@ -33,8 +30,10 @@ public class SimulacionSopa extends javax.swing.JFrame {
     /**
      * Creates new form SimulacionSopa
      */
-    public SimulacionSopa() {
-    
+    public SimulacionSopa(GrafoSopa sopa, Diccionario dic,int mb ) {
+        sopita = sopa;
+        diccionario = dic;
+        metododebusqueda = mb;
         this.setContentPane(fondo);
         initComponents();
         GrafoTextArea.setText(sopita.print());
@@ -59,7 +58,6 @@ public class SimulacionSopa extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         VolverInicio = new javax.swing.JButton();
-        MostrarGrafo = new javax.swing.JButton();
         PalabrasEncontradas = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -102,14 +100,6 @@ public class SimulacionSopa extends javax.swing.JFrame {
             }
         });
 
-        MostrarGrafo.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        MostrarGrafo.setText("Mostrar");
-        MostrarGrafo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MostrarGrafoActionPerformed(evt);
-            }
-        });
-
         PalabrasEncontradas.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         PalabrasEncontradas.setText("Mostrar");
         PalabrasEncontradas.addActionListener(new java.awt.event.ActionListener() {
@@ -129,20 +119,15 @@ public class SimulacionSopa extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(MostrarGrafo)))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(VolverInicio)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(9, Short.MAX_VALUE))
+                        .addContainerGap(12, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(PalabrasEncontradas)
@@ -160,9 +145,7 @@ public class SimulacionSopa extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MostrarGrafo)
-                    .addComponent(PalabrasEncontradas))
+                .addComponent(PalabrasEncontradas)
                 .addGap(18, 18, 18)
                 .addComponent(VolverInicio)
                 .addGap(17, 17, 17))
@@ -178,22 +161,18 @@ public class SimulacionSopa extends javax.swing.JFrame {
         inicio.show();
     }//GEN-LAST:event_VolverInicioActionPerformed
 
-    private void MostrarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarGrafoActionPerformed
-        // TODO add your handling code here:
-        GrafoTextArea.setText(sopita.print());
-    }//GEN-LAST:event_MostrarGrafoActionPerformed
-
     private void PalabrasEncontradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PalabrasEncontradasActionPerformed
         // TODO add your handling code here:
-        palabraEncontrada = funcion.RetornarPalabrasEncontradas(diccionario, sopita.getDatos(), metododebusqueda); 
-        MostrarPalabras.setText(palabraEncontrada);
+        
+        Diccionario diccionarionuevo = funcion.RetornarPalabrasEncontradas(diccionario, sopita.getDatos(), metododebusqueda);
+        MostrarPalabras.setText(diccionarionuevo.print());
     }//GEN-LAST:event_PalabrasEncontradasActionPerformed
 
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[], GrafoSopa sopa, Diccionario dic,int mb ) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -220,14 +199,13 @@ public class SimulacionSopa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SimulacionSopa().setVisible(true);
+                new SimulacionSopa(sopa, dic, mb).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea GrafoTextArea;
-    private javax.swing.JButton MostrarGrafo;
     private javax.swing.JTextArea MostrarPalabras;
     private javax.swing.JButton PalabrasEncontradas;
     private javax.swing.JButton VolverInicio;

@@ -4,8 +4,6 @@
  */
 package Clases;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,129 +12,113 @@ import java.io.IOException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
-/**Funciones
- * Funciones para buscar las palabras en la sopa de letras
- * 
+/**
  *
- * @author samue
+ * @author Samuel, Dayleen y Ana
  */
 public class Funciones {
     
-/**Arrays de direcciones en x y en y
- * 
- */
     private static final int[] dx = {1, 1, 0, -1, -1, -1, 0, 1};
     private static final int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
+    private boolean[][] visited; 
     
-    /**dfs
-     * Metodo para buscar palabra mediante Depth First Search 
-     * 
-     * @param datos
-     * @param palabra
-     * @param x
-     * @param y
-     * @param idx
-     * @return true si se encuenra la palabra
-     */
-    public boolean dfs(Letra[][] datos, String palabra, int x, int y, int idx) {
-        if (idx == palabra.length()) {
-            return true;
-        }
+    public boolean dfs(Letra[][] datos, String palabra, int x, int y, int idx, boolean[][] visited) { 
+    if (idx == palabra.length()) {
+        return true;
+    }
 
-        if (x < 0 || x >= datos.length || y < 0 || y >= datos[0].length || datos[x][y].getNombre().charAt(0) != palabra.charAt(idx)) {
-            return false;
-        }
-
-        char temp = datos[x][y].getNombre().charAt(0);
-        int aux = datos[x][y].getNumLetra();
-        datos[x][y] = new Letra();
-        datos[x][y].setNombre("#", aux);// Marcar como visitada
-
-        for (int k = 0; k < 8; k++) {
-            if (dfs(datos, palabra, x + dx[k], y + dy[k], idx + 1)) {
-                return true;
-            }
-        }
-
-        datos[x][y].setNombre(Character.toString(temp), datos[x][y].getNumLetra());  // Restaurar la letra original
+    if (x < 0 || x >= datos.length || y < 0 || y >= datos[0].length || visited[x][y] || datos[x][y].getNombre().charAt(0) != palabra.charAt(idx)) { //new || visited[x][y] ||
         return false;
     }
     
-    /**buscarPalabra
-     * Funcion que busca palabra en la sopa de letras utilizando DFS
-     * 
-     * @param datos
-     * @param palabra
-     * @return true si se encuentra la palabra en la sopa
-     */
+    char temp = datos[x][y].getNombre().charAt(0);
+    int aux = datos[x][y].getNumLetra();
+    datos[x][y].setNombre("#", aux); 
+    visited[x][y] = true; //new
+     
+    for (int k = 0; k < 8; k++) {
+        int newX = x + dx[k];
+        int newY = y + dy[k];
+
+            if (dfs(datos, palabra, newX, newY, idx + 1, visited)) { 
+                datos[x][y].setNombre(Character.toString(temp), aux);
+                return true;
+            }
+        }
+   
+
+    datos[x][y].setNombre(Character.toString(temp), aux); 
+    visited[x][y] = false;
+    return false;
+}
+
     
     public boolean buscarPalabra(Letra[][] datos, String palabra) {
         int n = datos.length;
         int m = datos[0].length;
+        boolean[][] visited = new boolean[n][m]; 
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (dfs(datos, palabra, i, j, 0)) {
+                if (dfs(datos, palabra, i, j, 0, visited)) {
                     return true;
                 }
+                visited = new boolean[n][m];
             }
         }
         return false;
     }
     
-/**buscarPalabraBFS
- * Buscar palabra mediante Breadth First Search
- * 
- * @param datos
- * @param palabra
- * @return true si se encuentra la palabra
- */   
     public boolean buscarPalabraBFS(Letra[][] datos, String palabra) {
-        int n = datos.length;
-        int m = datos[0].length;
-        boolean[][] visited = new boolean[n][m];
+    int n = datos.length;
+    int m = datos[0].length;
 
-        Queue<int[]> queue = new LinkedList<>();
-        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // Movimientos arriba, abajo, izquierda, derecha
+    int[][] directions = {
+        {-1, 0}, {1, 0}, {0, -1}, {0, 1}, 
+        {-1, -1}, {-1, 1}, {1, -1}, {1, 1} 
+    };
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (!visited[i][j]) {
-                    queue.offer(new int[]{i, j});
-                    visited[i][j] = true;
-
-                    while (!queue.isEmpty()) {
-                        int[] curr = queue.poll();
-                        int x = curr[0];
-                        int y = curr[1];
-
-                        if (datos[x][y].getNombre().equals(palabra)) {
-                            return true;
-                        }
-
-                        for (int[] dir : directions) {
-                            int newX = x + dir[0];
-                            int newY = y + dir[1];
-
-                            if (newX >= 0 && newX < n && newY >= 0 && newY < m && !visited[newX][newY]) {
-                                queue.offer(new int[]{newX, newY});
-                                visited[newX][newY] = true;
-                            }
-                        }
-                    }
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (datos[i][j].getNombre().charAt(0) == palabra.charAt(0)) {
+                
+                if (bfsRecursivo(datos, palabra, i, j, 0, directions, n, m, new boolean[n][m])) {
+                    return true;
                 }
             }
         }
-        return false;
     }
-/**buscarPalabraEspecifico
- * Busca la palabra especifica en la sopa de letras utilizando DFS o BFS
- * 
- * @param palabra
- * @param metodo
- * @param datos
- * @return true si se encuentra la palabra
- */
+
+    return false;
+}
+
+private boolean bfsRecursivo(Letra[][] datos, String palabra, int x, int y, int idx, int[][] directions, int n, int m, boolean[][] visited) {
+    
+    if (idx == palabra.length() - 1) {
+        return true;
+    }
+
+    visited[x][y] = true; 
+
+    
+    for (int[] dir : directions) {
+        int newX = x + dir[0];
+        int newY = y + dir[1];
+
+        
+        if (newX >= 0 && newX < n && newY >= 0 && newY < m && !visited[newX][newY] &&
+            datos[newX][newY].getNombre().charAt(0) == palabra.charAt(idx + 1)) {
+            
+            
+            if (bfsRecursivo(datos, palabra, newX, newY, idx + 1, directions, n, m, visited)) {
+                return true;
+            }
+        }
+    }
+
+    visited[x][y] = false; 
+    return false;
+}
     
     public boolean buscarPalabraEspecifico(Palabra palabra, int metodo, Letra[][] datos){
         if (metodo == 1){
@@ -152,52 +134,21 @@ public class Funciones {
         }
         return false;
     }
-/**RetornarPalabrasEcontradas
- * Devuelve un array de strings con las palabras encontradas en la sopa de letras
- * 
- * @param palabras
- * @param datos
- * @param metodo
- * @return Array de Strings de las palabras encontradas
- */
     
-    public String [] RetornarPalabrasEncontradas(Diccionario palabras, Letra[][] datos, int metodo){
-        String [] encontradas = new String[palabras.getSize()];
-         if (metodo == 1){
-                Palabra palabra = palabras.getFirst();
-             for (int i = 0; i<palabras.getSize(); i++) {
-                 
-                 if (buscarPalabraBFS(datos, palabra.getValor())){
-                     encontradas[i] = palabra.getValor();
-                     
-                 }
-                palabra = palabra.getNxt();
-             }
-}
-        else {
-             Palabra palabra = palabras.getFirst();
-             for (int i = 0; i<palabras.getSize(); i++) {
-                 
-                
-            if(buscarPalabra(datos, palabra.getValor())){
-                encontradas[i] = palabra.getValor();
+    public Diccionario RetornarPalabrasEncontradas(Diccionario palabras, Letra[][] datos, int metodo){
+    Palabra aux = palabras.getFirst();
+    Diccionario retornado = new Diccionario();
+        for (int i = 0; i< palabras.getSize();i++){
+            if (buscarPalabraEspecifico(aux, metodo, datos)){
+                retornado.Agregar(aux.getValor());
             }
-            palabra = palabra.getNxt();
-             }
-            
+            aux = aux.getNxt();
         
         }
-    
-    
-    return encontradas;
+    return retornado;
     }
-/**ReadDoc
- * Lee el contenido del archivo seleccionado por el usuario
- * 
- * @return El contenido del archivo de texto seleccionado por el usuario
- * @throws FileNotFoundException si el archivo no se encuentra
- * @throws IOException si ocurre un error al leer el archivo
- */
+    
+
     public String ReadDoc() throws FileNotFoundException, IOException{
         String line = "";
         String Cadena = "";
@@ -217,57 +168,45 @@ public class Funciones {
             BufferedReader in = new BufferedReader(new FileReader(file));
             while ((line = in.readLine()) != null) {
                Cadena += line;
+               Cadena += "\n";
                 
 	}
     }
         return Cadena;
     }
     
-    
-    
-/**TomarPalabras
- * Lee el contenido del archivo de texto y extrae las palabras del diccionario
- * 
- * @return objeto Diccionario que contiene las palabras extraidas del archivo
- * @throws IOException si ocurre un error al leer el archivo
- */    
-    
-    
-    public Diccionario TomarPalabras() throws IOException{
-        String cadena = ReadDoc();
+    public Diccionario TomarPalabras(String cadena) {
+        cadena = cadena.replace(" ", "");
         String [] aux = cadena.split("\n");
         Diccionario dicc = new Diccionario();
         int contador = 0;
-        if (aux[contador].equals("dic")){
+        
+        if (contador < aux.length && aux[contador].contains("dic")) { 
             contador ++;
-            while(!aux[contador].equals("/dic")){
+            while (contador < aux.length && !aux[contador].contains("/dic")) { 
                 dicc.Agregar(aux[contador]);
                 contador++;
+                
+                }
             }
-}
+
         return dicc;
-            }
-    
-/**CargarLetras
- * Lee el contenido del archivo de texto y extrae las letras de la sopa letras
- * 
- * @return un array de strings con las letras extraidas del archivo 
- * @throws IOException si ocurre un error al leer el archivo 
- */
-    
-    public String[] CargarLetras() throws IOException{
-        String cadena = ReadDoc();
-        String [] aux = cadena.split("\n");
-        int contador = 0;
-        if (aux[contador].equals("tab")){
-            contador ++;
-            String[] letras = aux[contador].split(",");
-            return letras;
-            
-}
-    String [] Vacio = new String [2]; 
-    return Vacio;
     }
     
+    
+    
+    public String[] CargarLetras(String cadena) {
+        cadena = cadena.replace(" ", "");
+        String [] aux = cadena.split("\n");
+        for (int i = 0; i < aux.length; i++) {
+        if (aux[i].contains("tab")) {
+            if (i + 1 < aux.length) { 
+            String[] letras = aux[i + 1].split(","); 
+            return letras;
+            }
+        }
+        }
+    return new String[0]; 
+    }
     
 }
