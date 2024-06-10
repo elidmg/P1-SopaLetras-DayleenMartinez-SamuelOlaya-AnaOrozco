@@ -12,7 +12,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-/**
+/**Clase que representa la ventana donde se muestra la sopa de letras y las palabras del diccionario encontradas
  *
  * @author Samuel, Dayleen y Ana 
  */
@@ -25,9 +25,8 @@ public class SimulacionSopa extends javax.swing.JFrame {
     Diccionario diccionario;
     Funciones funcion = new Funciones();
     
-     
 
-    /**
+    /**SimulacionSopa
      * Creates new form SimulacionSopa
      */
     public SimulacionSopa(GrafoSopa sopa, Diccionario dic,int mb ) {
@@ -153,14 +152,21 @@ public class SimulacionSopa extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**VolverInicioActionPerformed
+ * Boton para volver a la ventan principal
+ * 
+ * @param evt 
+ */
     private void VolverInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverInicioActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         Menu inicio = new Menu(); //colocar lo que va aqui
         inicio.show();
     }//GEN-LAST:event_VolverInicioActionPerformed
-
+/**PalabrasEncontradasActionPerformed
+ * Boton para mostrar las palabras encontradas 
+ * @param evt 
+ */
     private void PalabrasEncontradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PalabrasEncontradasActionPerformed
         // TODO add your handling code here:
         
@@ -217,7 +223,9 @@ public class SimulacionSopa extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-
+/**Fondo
+ * Fondo de la interfaz 
+ */
         class Fondo extends JPanel{
         private Image imagen;
         @Override

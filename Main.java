@@ -7,7 +7,7 @@ package Clases;
 import ClasesInterfaz.Menu;
 
 
-/**
+/**Clase Main
  *
  * @author Samuel, Dayleen y Ana
  */

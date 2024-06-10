@@ -4,7 +4,7 @@
  */
 package Clases;
 
-/**
+/**Clase Diccionario
  *
  * @author Samuel, Dayleen y Ana
  */
@@ -13,13 +13,22 @@ public class Diccionario {
     public Palabra first;
     public Palabra Last;
     public int Size;
-
+    
+/**Constructor de Diccionario
+ * 
+ */
     public Diccionario() {
         this.first = null;
         this.Last = null;
         this.Size = 0;
         
     }
+  /**Agregar 
+  * Metodo para agregar palabras al diccionario
+  * 
+  * @param valor
+  * @return True si se agrega la palabra 
+  */
     
     public boolean Agregar(String valor) {
     Palabra nuevaPalabra = new Palabra(valor);
@@ -64,7 +73,13 @@ public class Diccionario {
 
     this.Size++;
     return true;
-}   
+} 
+    
+/**print 
+ * Retornar las palabras del diccionario 
+ * 
+ * @return cadena de string de las palabras del diccionario
+ */
 
     
         public String print(){
@@ -82,32 +97,71 @@ public class Diccionario {
             
             }
             return Matrix;
-        } 
+        }
+/**EsVacio
+ * Metodo para saber si el diccionario esta vacio
+ * 
+ * @return true si el diccionario esta vacio
+ */
+ 
    
         public boolean EsVacio(){
         return first == null;
     }
     
-
+/**getFirst 
+ * Obtiene la primera palabra del diccionario 
+ * 
+ * @return first  
+ */
     public Palabra getFirst() {
         return first;
     }
-
+/**getLast 
+ * Obtiene la ultima palabra del diccionario 
+ * 
+ * @return Last
+ */
     public Palabra getLast() {
         return Last;
     }
+    
+/**getsize
+ * Obtine el size del diccionario
+ * 
+ * @return Size
+ */
+
 
     public int getSize() {
         return Size;
     }
+/**setFirst
+ * Establece la primera palabra del diccionario
+ * 
+ * @param first 
+ */
+
 
     public void setFirst(Palabra first) {
         this.first = first;
     }
+/**setLast
+ * Establece la ultima palabra del diccionario 
+ * 
+ * @param Last 
+ */
+
 
     public void setLast(Palabra Last) {
         this.Last = Last;
     }
+    
+/**setSize
+ * Establece el size del diccionario
+ * 
+ * @param Size 
+ */
 
     public void setSize(int Size) {
         this.Size = Size;

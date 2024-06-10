@@ -17,7 +17,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
-/**
+/**Menu
+ * Clase que representa la ventana principal de el programa de sopa de letras
+ * 
  *
  * @author Samuel, Dayleen y Ana
  */
@@ -225,11 +227,18 @@ public class Menu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**EntradaBottonBuscarActionPerformed
+ *Espacio donde el usuario introduce la palabra que desea buscar
+ * 
+ * @param evt 
+ */
     private void EntradaBottonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntradaBottonBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EntradaBottonBuscarActionPerformed
-
+/**BuscarTodasBottonInicioActionPerformed
+ * Boton para buscar todas las palabras del diccionario 
+ * @param evt 
+ */
     private void BuscarTodasBottonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarTodasBottonInicioActionPerformed
         // TODO add your handling code here:
         // Validar que el diccionario no esté vacío
@@ -261,7 +270,11 @@ public class Menu extends javax.swing.JFrame {
     
 
     }//GEN-LAST:event_BuscarTodasBottonInicioActionPerformed
-
+/**MetodoDFSActionPerformed
+ * Boton para elegir DFS como metodo de busqueda 
+ * 
+ * @param evt 
+ */
     private void MetodoDFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetodoDFSActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
@@ -282,7 +295,10 @@ public class Menu extends javax.swing.JFrame {
             
         
     }//GEN-LAST:event_MetodoDFSActionPerformed
-
+/**MetodoBFSActionPerformed
+ * Boton para elegir BFS como metodo de busqueda
+ * @param evt 
+ */
     private void MetodoBFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetodoBFSActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
@@ -301,7 +317,10 @@ public class Menu extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Metodo seleccionado, continue", "=)", JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_MetodoBFSActionPerformed
-
+/**BuscarEspecificoBottonInicioActionPerformed
+ * Boton que al darle click se busca la palabra que ingreso el usuario
+ * @param evt 
+ */
     private void BuscarEspecificoBottonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarEspecificoBottonInicioActionPerformed
         // TODO add your handling code here:
         if (sopita == null || sopita.getDatos() == null || sopita.getDatos().length == 0) {
@@ -337,7 +356,10 @@ public class Menu extends javax.swing.JFrame {
         simulacion = new SimulacionSopa(sopita, diccionario, metododebusqueda); //colocar lo que va aqui
         simulacion.show();
     }//GEN-LAST:event_BuscarEspecificoBottonInicioActionPerformed
-
+/**CargarDataActionPerformed
+ * Boton para cargar los datos del archivo de texto 
+ * @param evt 
+ */
     private void CargarDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarDataActionPerformed
         
          try {
@@ -362,7 +384,7 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_CargarDataActionPerformed
 
-    /**
+    /**main
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -413,7 +435,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
-    
+
+/**Fondo
+ * Fondo de la interfaz 
+ */    
     class Fondo extends JPanel{
         private Image imagen;
         @Override

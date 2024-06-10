@@ -12,15 +12,33 @@ import java.io.IOException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
-/**
+/**Funciones
+ * Funciones para buscar las palabras en la sopa de letras
+ * 
+
  *
  * @author Samuel, Dayleen y Ana
  */
 public class Funciones {
-    
+
+/**Arrays de direcciones en x y en y
+ * 
+ */
     private static final int[] dx = {1, 1, 0, -1, -1, -1, 0, 1};
     private static final int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
     private boolean[][] visited; 
+
+    /**dfs
+     * Metodo para buscar palabra mediante Depth First Search 
+     * 
+     * @param datos
+     * @param palabra
+     * @param x
+     * @param y
+     * @param idx
+     * @param visited 
+     * @return true si se encuenra la palabra
+     */
     
     public boolean dfs(Letra[][] datos, String palabra, int x, int y, int idx, boolean[][] visited) { 
     if (idx == palabra.length()) {
@@ -51,8 +69,16 @@ public class Funciones {
     visited[x][y] = false;
     return false;
 }
-
     
+    /**buscarPalabra
+     * Funcion que busca palabra en la sopa de letras utilizando DFS
+     * 
+     * @param datos
+     * @param palabra
+     * @return true si se encuentra la palabra en la sopa
+     */
+    
+
     public boolean buscarPalabra(Letra[][] datos, String palabra) {
         int n = datos.length;
         int m = datos[0].length;
@@ -68,6 +94,13 @@ public class Funciones {
         }
         return false;
     }
+/**buscarPalabraBFS
+ * Buscar palabra mediante Breadth First Search
+ * 
+ * @param datos
+ * @param palabra
+ * @return true si se encuentra la palabra
+ */  
     
     public boolean buscarPalabraBFS(Letra[][] datos, String palabra) {
     int n = datos.length;
@@ -91,6 +124,20 @@ public class Funciones {
 
     return false;
 }
+/**bfsRecursivo
+ * Hace la busqueda de las letras que pueden formar una palabra  
+ * 
+ * @param datos
+ * @param palabra
+ * @param x
+ * @param y
+ * @param idx
+ * @param directions
+ * @param n
+ * @param m
+ * @param visited
+ * @return true si encuentra la palabra 
+ */
 
 private boolean bfsRecursivo(Letra[][] datos, String palabra, int x, int y, int idx, int[][] directions, int n, int m, boolean[][] visited) {
     
@@ -119,6 +166,15 @@ private boolean bfsRecursivo(Letra[][] datos, String palabra, int x, int y, int 
     visited[x][y] = false; 
     return false;
 }
+
+/**buscarPalabraEspecifico
+ * Busca la palabra especifica en la sopa de letras utilizando DFS o BFS
+ * 
+ * @param palabra
+ * @param metodo
+ * @param datos
+ * @return true si se encuentra la palabra
+ */
     
     public boolean buscarPalabraEspecifico(Palabra palabra, int metodo, Letra[][] datos){
         if (metodo == 1){
@@ -134,6 +190,13 @@ private boolean bfsRecursivo(Letra[][] datos, String palabra, int x, int y, int 
         }
         return false;
     }
+/**RetornarPalabrasEncontradas
+ * Metodo para mostrar las palabras encontradas del diccionario
+ * @param palabras
+ * @param datos
+ * @param metodo
+ * @return array de strings con las palabras encontradas 
+ */
     
     public Diccionario RetornarPalabrasEncontradas(Diccionario palabras, Letra[][] datos, int metodo){
     Palabra aux = palabras.getFirst();
@@ -147,6 +210,15 @@ private boolean bfsRecursivo(Letra[][] datos, String palabra, int x, int y, int 
         }
     return retornado;
     }
+    
+/**ReadDoc
+ * Funcion para leer el archivo de texto 
+ * 
+ * @return
+ * @throws FileNotFoundException
+ * @throws IOException 
+ * @return Cadena String con todo lo que tiene el archivo
+ */
     
 
     public String ReadDoc() throws FileNotFoundException, IOException{
@@ -174,6 +246,13 @@ private boolean bfsRecursivo(Letra[][] datos, String palabra, int x, int y, int 
     }
         return Cadena;
     }
+/**TomarPalabras
+ * Funcion que toma las palabras de la cadena formada por el archivo de texto 
+ * 
+ * @param cadena
+ * @return Diccionario con las palabras tomadas
+ */
+    
     
     public Diccionario TomarPalabras(String cadena) {
         cadena = cadena.replace(" ", "");
@@ -192,6 +271,13 @@ private boolean bfsRecursivo(Letra[][] datos, String palabra, int x, int y, int 
 
         return dicc;
     }
+    
+/**CargarLetras
+ * Funcion que carga las letras de la cadena formada por el archivo de texto
+ * 
+ * @param cadena
+ * @return Array de Strings con las letras y un array nulo en caso de que algo falle 
+ */
     
     
     
